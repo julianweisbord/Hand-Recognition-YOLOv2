@@ -7,13 +7,13 @@ SCREEN_WIDTH_RES = 1280
 SCREEN_HEIGHT_RES = 720
 SCREEN_LENGTH = 12.35
 HAND_WIDTH = 3.15
-FOCAL_LENGTH = 1700
+FOCAL_LENGTH = 1550
 
-def classify(step=12375):
+def classify(step=2625):
     params = {
         'model': 'cfg/tiny-yolo-voc-1c.cfg',
         'load': step,
-        'threshold': 0.4,
+        'threshold': 0.35,
         'gpu': 1.0
     }
 
