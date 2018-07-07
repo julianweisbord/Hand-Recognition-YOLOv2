@@ -1,0 +1,5 @@
+tensorflow==1.4.1
+opencv-python==3.3.0.10
+matplotlib==2.0.2
+lxml==3.5.0
+Cython==0.28.3
