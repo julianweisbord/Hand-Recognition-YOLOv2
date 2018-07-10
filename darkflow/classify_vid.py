@@ -7,13 +7,13 @@ SCREEN_WIDTH_RES = 1280
 SCREEN_HEIGHT_RES = 720
 SCREEN_LENGTH = 12.35
 HAND_WIDTH = 3.15
-FOCAL_LENGTH = 1550
+FOCAL_LENGTH = 1750
 
-def classify(step=2625):
+def classify(step=25875):
     params = {
         'model': 'cfg/tiny-yolo-voc-1c.cfg',
         'load': step,
-        'threshold': 0.35,
+        'threshold': 0.62,
         'gpu': 1.0
     }
 
@@ -35,15 +35,16 @@ def classify(step=2625):
                 hand_pixel_width = br[0] - tl[0]
                 distance_ft = (HAND_WIDTH * FOCAL_LENGTH) / (12 * hand_pixel_width)
 
-                if distance_ft > 9:  # Reduce noise, probably not a person on a webcam
+                if distance_ft > 13:  # Reduce noise, probably not a person on a webcam
                     break
 
                 label = result['label']
                 confidence = result['confidence']
-                text = '{} {:.1f} ft. : {:.0f}%'.format(label, distance_ft, confidence * 100)
+                text = '{} {:.1f} ft.'.format(label, distance_ft)
+                # text = '{} {:.1f} ft. : {:.0f}%'.format(label, distance_ft, confidence * 100)
                 frame = cv2.rectangle(frame, tl, br, color, 5)
                 frame = cv2.putText(
-                    frame, text, tl, cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
+                    frame, text, tl, cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 0), 2)
             cv2.imshow('frame', frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
